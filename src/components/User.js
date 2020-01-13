@@ -10,7 +10,7 @@ const propTypes = {
 
 export default function User({ name, id, email, username }) {
   return (
-    <div className="user">
+    <div className="user" data-testid={`user-${id}`}>
       <div>
         <span>{name}</span>
         <span> ({username})</span>

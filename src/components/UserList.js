@@ -1,19 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getUsers } from '../redux/users/userActions';
 import User from './User';
 
-const propTypes = {
-  users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired
-};
+export default function UserList() {
+  const { loading, error, users } = useSelector(state => state.users);
+  const dispatch = useDispatch();
 
-const defaultProps = {
-  users: []
-};
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
 
-export default function UserList({ users, loading, error }) {
   return (
     <div className="container">
       <h3>User List</h3>
@@ -27,6 +25,3 @@ export default function UserList({ users, loading, error }) {
     </div>
   );
 }
-
-UserList.propTypes = propTypes;
-UserList.defaultProps = defaultProps;
