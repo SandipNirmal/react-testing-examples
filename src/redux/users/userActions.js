@@ -1,4 +1,4 @@
-import { USERS } from './actioTypes';
+import { USERS } from './actionTypes';
 
 export const getUsers = () => {
   return {
@@ -9,6 +9,13 @@ export const getUsers = () => {
 export const setUsers = payload => {
   return {
     type: USERS.SET,
+    payload
+  };
+};
+
+export const setError = payload => {
+  return {
+    type: USERS.SET_ERROR,
     payload
   };
 };

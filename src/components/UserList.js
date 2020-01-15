@@ -16,7 +16,11 @@ export default function UserList() {
     <div className="container">
       <h3>User List</h3>
       {loading && <div>Loading...</div>}
-      {error && <div className="error">{error}</div>}
+      {error && (
+        <div data-testid="userlist-error" className="error">
+          {error}
+        </div>
+      )}
       {users.length ? (
         users.map(user => <User key={user.id} {...user} />)
       ) : (

@@ -35,3 +35,30 @@ it('renders component', async () => {
   expect(axios.get).toHaveBeenCalledWith(url);
   expect(user).toHaveTextContent('Chuck Norris');
 });
+
+it('shows error for failed request', async () => {
+  jest.spyOn(axios, 'get').mockImplementationOnce(() => {
+    return Promise.reject(new Error('Failed to load users'));
+  });
+
+  const { getByText, getByTestId } = renderWithProviders(<UserList />);
+
+  expect(getByText('Loading...')).toBeInTheDocument();
+
+  const error = await waitForElement(() => getByTestId('userlist-error'));
+
+  expect(axios.get).toHaveBeenCalledWith(url);
+  expect(error).toHaveTextContent('Failed to load users');
+});
+
+it('shows default error for failed request', async () => {
+  jest.spyOn(axios, 'get').mockImplementationOnce(() => {
+    return Promise.reject(new Error());
+  });
+
+  const { getByTestId } = renderWithProviders(<UserList />);
+  const error = await waitForElement(() => getByTestId('userlist-error'));
+
+  expect(axios.get).toHaveBeenCalledWith(url);
+  expect(error).toHaveTextContent('Error fetching users!');
+});

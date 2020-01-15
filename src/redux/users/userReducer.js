@@ -1,4 +1,4 @@
-import { USERS } from './actioTypes';
+import { USERS } from './actionTypes';
 
 const initialState = {
   loading: false,
@@ -8,6 +8,8 @@ const initialState = {
 
 export function userReducer(state = initialState, action) {
   const { type, payload } = action;
+
+  // console.log(type, payload);
 
   switch (type) {
     case USERS.GET:
@@ -21,6 +23,13 @@ export function userReducer(state = initialState, action) {
         loading: false,
         error: '',
         users: payload
+      };
+
+    case USERS.SET_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: payload || 'Error fetching users!'
       };
 
     default:
