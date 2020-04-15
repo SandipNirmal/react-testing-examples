@@ -2,7 +2,7 @@
 
 Basic example of using React Testing Library
 
-![Pipeline](https://github.com/SandipNirmal/react-testing-examples/workflows/Node.js%20CI/badge.svg?branch=master)
+![Tests](https://github.com/SandipNirmal/react-testing-examples/workflows/Tests/badge.svg)
 
 ## Available Scripts
 
