@@ -6,37 +6,6 @@ on:
   pull_request:
     branches: [master]
 
-# jobs:
-#   test:
-#     strategy:
-#       matrix:
-#         platform: ubuntu-latest
-#         node: [ '12' ]
-#     name: test/node ${{ matrix.node }}/${{ matrix.platform }}
-#     runs-on: ${{ matrix.platform }}
-#     steps:
-#     - uses: actions/checkout@master
-#     - uses: actions/setup-node@master
-#       with:
-#         node-version: ${{ matrix.node }}
-#     - run: npm install
-#     - run: npm test
-#   coverage:
-#     needs: [ test ]
-#     name: coverage
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@master
-#     - uses: actions/setup-node@master
-#       with:
-#         node-version: '12'
-#     - run: npm install
-#     - uses: paambaati/codeclimate-action@v2.2.4
-#       env:
-#         CC_TEST_REPORTER_ID: 945dfb58a832d233a3caeb84e3e6d3be212e8c7abcb48117fce63b9adcb43647
-#       with:
-#         coverageCommand: yarn test --coverage
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -46,14 +15,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: test
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       # Run code coverage
-      - uses: paambaati/codeclimate-action@v2.2.4
+      - run: npm test --coverag
         env:
           CI: true
-        with:
-          coverageCommand: npm test --coverage
