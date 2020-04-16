@@ -21,6 +21,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       # Run code coverage
-      - run: npm test --coverag
+      - run: npm test --coverage
         env:
           CI: true
